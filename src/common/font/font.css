@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Bradley Hand ITC";
+    src: url('Bradley Hand ITC.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Bradley Hand ITC TT Italic";
+    src: url('Bradley Hand ITC TT Italic.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "NewFontXingshu";
+    src: url('XingShiXinYingBiXingShuJianTi-1.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
