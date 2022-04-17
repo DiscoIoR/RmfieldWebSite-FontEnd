@@ -170,6 +170,7 @@ export default {
   position: fixed;
   height: 100%;
   width: 18%;
+  min-width: 150px;
   right: 0;
 }
 .navigation-bar-user {

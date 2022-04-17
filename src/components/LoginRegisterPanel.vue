@@ -246,7 +246,6 @@ export default {
         }),
       }).then(response => {
         let jsonResult = response.data;
-        console.log(jsonResult)
         register_result.value = jsonResult.state
       }).catch(() => {
         register_result.value = 1
@@ -276,7 +275,6 @@ export default {
         }),
       }).then(response => {
         let jsonResult = response.data;
-        console.log(jsonResult)
         login_result.value = jsonResult.state
       }).catch(() => {
         login_result.value = 1

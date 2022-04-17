@@ -24,7 +24,7 @@
           <p>复制字段token:"xxxx"引号中间的部分</p>
         </div>
         <div class="arknights_data_update_submit_box">
-          <input class="arknights_data_update_input" placeholder="粘贴token到此处">
+          <input v-model="arknights_token" class="arknights_data_update_input" placeholder="粘贴token到此处">
           <div class="arknights_data_update_submit_state">{{ update_submit_state }}</div>
           <button @click="arknights_data_update_submit" class="arknights_data_update_submit_button">更新</button>
         </div>
@@ -33,7 +33,7 @@
       <div class="arknights-general-info-box">
         <div class="arknights-last-update-time-box">
           <div class="arknights-last-update-time">
-            数据更新时间<br>
+            数据同步时间<br>
             {{ last_update_time }}
           </div>
         </div>
@@ -167,7 +167,7 @@ export default {
       }).then(response => {
         let result = response.data;
         let state = result.state;
-        let data = result.data
+        let data = result.data;
         if(state===0){
           username.value = data.username;
           uid.value = data.uid;
@@ -247,12 +247,35 @@ export default {
           })
 
         }
+      }).catch(()=>{
+        console.log('从服务器拉取数据失败')
       })
     }
 
     get_general_data()
 
-
+    // 数据更新
+    let arknights_token = ref('')
+    let update_submit_state = ref('')
+    function arknights_data_update_submit(){
+      axios({
+        url: "/user/api/arknights",
+        method: "post",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({token:arknights_token.value}),
+      }).then(response=>{
+        let result = response.data;
+        let state = result.state;
+        if(state===0){
+          update_submit_state.value = '服务器数据更新成功'
+          get_general_data()
+        }
+      }).catch(()=>{
+        update_submit_state.value = '数据更新时出现异常'
+      })
+    }
 
     onMounted(() => {
       characters_chart = echarts.init(document.getElementById("character_proportion"))
@@ -580,7 +603,10 @@ export default {
       last_update_time:last_update_time,
       diamond_income:diamond_income,
       diamond_expenses:diamond_expenses,
-      order_total:order_total
+      order_total:order_total,
+      arknights_token:arknights_token,
+      arknights_data_update_submit,
+      update_submit_state:update_submit_state
     }
   }
 }
