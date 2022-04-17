@@ -3,38 +3,38 @@
     <div class="navigation-bar-user">
       <div class="navigation-bar-user-content-logout" @click="clickLogout" v-if="state_ctrl_2!==''">
         {{ state_ctrl_2 }}
-        <router-link to="/" id="home" style="display: none" target="_self"></router-link>
+        <router-link :to="state_ctrl_2_url" id="home" style="display: none" target="_self"></router-link>
       </div>
       <div class="navigation-bar-user-content-divide" v-if="(state_ctrl_1!=='')&&(state_ctrl_2!=='')">
         |
       </div>
       <div class="navigation-bar-user-content-home" @click="clickHome" v-if="state_ctrl_1!==''">
         {{state_ctrl_1}}
-        <router-link to="/" id="logout" style="display: none" target="_self"></router-link>
+        <router-link :to="state_ctrl_1_url" id="logout" style="display: none" target="_self"></router-link>
       </div>
     </div>
     <div class="navigation-bar-element" v-if="element_1!==''">
       <div class="navigation-bar-element-content" @click="clickElement1">
         {{ element_1 }}
-        <router-link to="/" id="element1" style="display: none" target="_self"></router-link>
+        <router-link :to="element_1_url" id="element1" style="display: none" target="_self"></router-link>
       </div>
     </div>
     <div class="navigation-bar-element" v-if="element_2!==''">
       <div class="navigation-bar-element-content" @click="clickElement2">
         {{ element_2 }}
-        <router-link to="/" id="element2" style="display: none" target="_self"></router-link>
+        <router-link :to="element_2_url" id="element2" style="display: none" target="_self"></router-link>
       </div>
     </div>
     <div class="navigation-bar-element" v-if="element_3!==''">
       <div class="navigation-bar-element-content" @click="clickElement3">
         {{ element_3 }}
-        <router-link to="/" id="element3" style="display: none" target="_self"></router-link>
+        <router-link :to="element_3_url" id="element3" style="display: none" target="_self"></router-link>
       </div>
     </div>
     <div class="navigation-bar-element" v-if="element_4!==''">
       <div class="navigation-bar-element-content" @click="clickElement4">
         {{ element_4 }}
-        <router-link to="/" id="element4" style="display: none" target="_self"></router-link>
+        <router-link :to="element_4_url" id="element4" style="display: none" target="_self"></router-link>
       </div>
     </div>
   </div>
@@ -42,31 +42,31 @@
   <div v-if="deviceType==='mobile'" :class="navigation_bar_mobile">
     <div class="navigation-bar-mobile-user">
       <div class="navigation-bar-mobile-user-content-home" v-if="state_ctrl_1!==''">
-        <router-link to="/" class="navigation-bar-mobile-user-link">{{ state_ctrl_1 }}</router-link>
+        <router-link :to="state_ctrl_1_url" class="navigation-bar-mobile-user-link">{{ state_ctrl_1 }}</router-link>
       </div>
       <br>
       <div class="navigation-bar-mobile-user-content-logout" v-if="state_ctrl_2!==''">
-        <router-link to="/" class="navigation-bar-mobile-user-link">{{ state_ctrl_2 }}</router-link>
+        <router-link :to="state_ctrl_2_url" class="navigation-bar-mobile-user-link">{{ state_ctrl_2 }}</router-link>
       </div>
     </div>
     <div class="navigation-bar-mobile-element" v-if="element_1!==''">
       <div class="navigation-bar-mobile-element-content">
-        <router-link to="/" class="navigation-bar-mobile-element-link">{{ element_1 }}</router-link>
+        <router-link :to="element_1_url" class="navigation-bar-mobile-element-link">{{ element_1 }}</router-link>
       </div>
     </div>
     <div class="navigation-bar-mobile-element" v-if="element_2!==''">
       <div class="navigation-bar-mobile-element-content">
-        <router-link to="/" class="navigation-bar-mobile-element-link">{{ element_2 }}</router-link>
+        <router-link :to="element_2_url" class="navigation-bar-mobile-element-link">{{ element_2 }}</router-link>
       </div>
     </div>
     <div class="navigation-bar-mobile-element" v-if="element_3!==''">
       <div class="navigation-bar-mobile-element-content">
-        <router-link to="/" class="navigation-bar-mobile-element-link">{{ element_3 }}</router-link>
+        <router-link :to="element_3_url" class="navigation-bar-mobile-element-link">{{ element_3 }}</router-link>
       </div>
     </div>
     <div class="navigation-bar-mobile-element" v-if="element_4!==''">
       <div class="navigation-bar-mobile-element-content">
-        <router-link to="/" class="navigation-bar-mobile-element-link">{{ element_4 }}</router-link>
+        <router-link :to="element_4_url" class="navigation-bar-mobile-element-link">{{ element_4 }}</router-link>
       </div>
     </div>
   </div>
@@ -79,18 +79,23 @@ export default {
   name: "NavigationBar-Components",
   props: {
     state_ctrl_1:String,
+    state_ctrl_1_url:String,
     state_ctrl_2:String,
+    state_ctrl_2_url:String,
     element_1:String,
+    element_1_url:String,
     element_2:String,
+    element_2_url:String,
     element_3:String,
+    element_3_url:String,
     element_4:String,
+    element_4_url:String,
 },
   setup() {
-
+    let deviceType = ref('')
     function _isMobile(){
       return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
     }
-    const deviceType = ref(null)
 
     const navigation_bar_mobile = ref('navigation_bar_mobile_before_slide')
     let positionX_start = 0
@@ -134,17 +139,16 @@ export default {
       document.getElementById("element4").click();
     }
 
+    if(_isMobile()){
+      deviceType.value='mobile'
+    }else {
+      deviceType.value='pc'
+    }
+
     onMounted(() => {
       window.addEventListener('touchstart', handleTouchstart)
       window.addEventListener('touchend', handleTouchend)
-
-      if(_isMobile()){
-        deviceType.value='mobile'
-      }else {
-        deviceType.value='pc'
-      }
     })
-
 
     return {
       navigation_bar_mobile:navigation_bar_mobile,
@@ -265,22 +269,26 @@ export default {
 .navigation_bar_mobile_before_slide{
   position: fixed;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.6);
   transition-duration: 0.3s;
   height: 81%;
   width: 40%;
   top: 2%;
   left: 105%;
+  z-index: 100;
 }
 .navigation_bar_mobile_after_slide{
   position: fixed;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.6);
   transition-duration: 0.3s;
   height: 81%;
   width: 40%;
   top: 2%;
   left: 58%;
+  z-index: 100;
 }
 .navigation-bar-mobile-user{
   position: relative;

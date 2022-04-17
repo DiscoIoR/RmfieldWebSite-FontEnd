@@ -9,6 +9,16 @@ module.exports = defineConfig({
         //  接口请求路径
         target: "http://127.0.0.1:10492",//反向代理的目标地址
         changeOrigin: true
+      },
+      "/user/api": {
+        //  接口请求路径
+        target: "http://127.0.0.1:10492",//反向代理的目标地址
+        changeOrigin: true
+      },
+      "/admin/api": {
+        //  接口请求路径
+        target: "http://127.0.0.1:10492",//反向代理的目标地址
+        changeOrigin: true
       }
     }
   }

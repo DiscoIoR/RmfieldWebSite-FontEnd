@@ -6,6 +6,8 @@ import UserApp from "@/components/User-App";
 // import Base from "@/components/Base";
 // import LoginRegisterPanel from "@/components/LoginRegisterPanel";
 // import NavigationBar from "@/components/NavigationBar";
+import ArknightsAnalysisApp from "@/components/ArknightsAnalysis-App";
+import ArknightsGeneral from "@/components/ArknightsGeneral";
 
 const routes = [
     {
@@ -16,6 +18,19 @@ const routes = [
         path: '/user',
         component: UserApp,
         // meta: {auth:true}
+        children: [
+            {
+                path: 'arknights-analysis',
+                component: ArknightsAnalysisApp,
+                children: [
+                    {
+                        path: 'general',
+                        name: 'ArknightsGeneral',
+                        component: ArknightsGeneral
+                    }
+                ]
+            }
+        ]
     }
     // {
     //     path: '/',

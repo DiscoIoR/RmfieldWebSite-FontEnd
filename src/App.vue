@@ -2,15 +2,17 @@
   <div>
     <router-view />
   </div>
-<!--  <router-view name="m1"></router-view>-->
-<!--  <router-view name="m2"></router-view>-->
 </template>
 
 <script>
-
+import * as echarts from 'echarts'
+import {provide} from "vue";
 
 export default {
-  name: "App"
+  name: "App",
+  setup(){
+    provide('echarts',echarts)
+  }
 }
 </script>
 

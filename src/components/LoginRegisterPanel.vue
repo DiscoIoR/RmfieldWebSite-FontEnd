@@ -444,7 +444,7 @@ export default {
   border-radius: 10px;
   margin-top: 6%;
   padding-left: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   vertical-align: center;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
@@ -462,7 +462,7 @@ export default {
   border-radius: 10px;
   margin-top: 6%;
   padding-left: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
@@ -480,7 +480,7 @@ export default {
   border-radius: 10px;
   margin-top: 6%;
   padding-left: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   color: #39C5BB;
   caret-color: #39C5BB;
@@ -500,7 +500,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-top: 8%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
@@ -517,7 +517,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-top: 8%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
@@ -535,7 +535,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-top: 8%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.6);
@@ -553,7 +553,7 @@ export default {
   border-radius: 10px;
   margin-top: 8%;
   margin-left: 5%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
@@ -571,7 +571,7 @@ export default {
   border-radius: 10px;
   margin-top: 8%;
   margin-left: 5%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
@@ -590,7 +590,7 @@ export default {
   border-radius: 10px;
   margin-top: 8%;
   margin-left: 5%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.6);
@@ -657,7 +657,7 @@ export default {
   position: absolute;
   margin-left: 10px;
   margin-top: 0;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
 }
 
@@ -688,7 +688,7 @@ export default {
   border-radius: 10px;
   width: 80%;
   min-width: 190px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
@@ -703,7 +703,7 @@ export default {
   border-radius: 10px;
   width: 80%;
   min-width: 190px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
@@ -719,7 +719,7 @@ export default {
   border-radius: 10px;
   width: 80%;
   min-width: 190px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   color: #39C5BB;
   caret-color: #39C5BB;
@@ -792,7 +792,7 @@ export default {
   min-width: 100px;
   height: 40px;
   border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
@@ -808,7 +808,7 @@ export default {
   min-width: 100px;
   height: 40px;
   border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
@@ -825,7 +825,7 @@ export default {
   min-width: 100px;
   height: 40px;
   border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.6);
@@ -842,7 +842,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-left: 6%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
@@ -859,7 +859,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-left: 6%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
@@ -877,7 +877,7 @@ export default {
   height: 40px;
   border-radius: 10px;
   margin-left: 6%;
-  font-family: Bradley Hand ITC, Consolas, 微软雅黑, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
   font-size: 18px;
   box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.6);
