@@ -29,7 +29,7 @@ export default {
   setup:function (){
     return{
       state_ctrl_1:'Home',
-      state_ctrl_1_url:'/',
+      state_ctrl_1_url:'/user',
       state_ctrl_2:'Logout',
       state_ctrl_2_url:'/',
       element_1:'Arknights Analysis',

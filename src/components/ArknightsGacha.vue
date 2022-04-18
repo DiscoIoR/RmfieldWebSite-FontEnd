@@ -40,7 +40,6 @@
         </tbody>
       </table>
     </div>
-
   </div>
 </template>
 
@@ -88,13 +87,7 @@ export default {
 }
 </script>
 
-<style>
-.arknights-qurery-box-pc{
-  overflow: hidden  !important;
-  width: 100%;
-  height: 90%;
-  text-align: center;
-}
+<style scoped>
 
 .gacha-table-box{
   display: inline-block;
@@ -105,7 +98,6 @@ export default {
 .gacha-table{
   width: 100%;
   height: 100%;
-
   border-spacing: 0 1px;
   position: relative;
   text-align: center;

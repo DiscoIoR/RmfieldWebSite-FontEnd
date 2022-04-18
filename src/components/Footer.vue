@@ -6,9 +6,9 @@
         <div class="footer-content-maintainer-discribe">
           <span>DiscoloR</span>
           <br>
-          <span><a href="https://github.com/DiscoIoR" class="footer_link_discribe">Github</a></span>
+          <span><a href="https://github.com/DiscoIoR" class="footer_link_discribe">github</a></span>
           <br>
-          <span><a href="https://space.bilibili.com/86618315" class="footer_link_discribe">Bilibili</a></span>
+          <span><a href="https://space.bilibili.com/86618315" class="footer_link_discribe">bilibili</a></span>
           <br>
         </div>
       </div>
