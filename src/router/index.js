@@ -8,6 +8,9 @@ import UserApp from "@/components/User-App";
 // import NavigationBar from "@/components/NavigationBar";
 import ArknightsAnalysisApp from "@/components/ArknightsAnalysis-App";
 import ArknightsGeneral from "@/components/ArknightsGeneral";
+import ArknightsGacha from "@/components/ArknightsGacha";
+import ArknightsDiamond from "@/components/ArknightsDiamond";
+import ArknightsOrder from "@/components/ArknightsOrder";
 
 const routes = [
     {
@@ -27,6 +30,21 @@ const routes = [
                         path: 'general',
                         name: 'ArknightsGeneral',
                         component: ArknightsGeneral
+                    },
+                    {
+                        path: 'gacha',
+                        name: 'ArknightsGacha',
+                        component: ArknightsGacha
+                    },
+                    {
+                        path: 'diamond',
+                        name: 'ArknightsDiamond',
+                        component: ArknightsDiamond
+                    },
+                    {
+                        path: 'order',
+                        name: 'ArknightsOrder',
+                        component: ArknightsOrder
                     }
                 ]
             }

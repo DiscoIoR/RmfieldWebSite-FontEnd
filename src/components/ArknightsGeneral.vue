@@ -1,72 +1,50 @@
 <template>
-  <div :class="arknights_general_dev">
-
-    <div :class="arknights_qurery_box">
-      <div :class="[arknights_user_info_box,arknights_user_info_box_bg_img]">
-        <div class="arknights-user-info">
-          <div class="arknights-username">
-            Dr.{{ username }}
-          </div>
-          <div class="arknights-uid">
-            uid:{{ uid }}
-          </div>
-        </div>
+  <div :class="[arknights_user_info_box,arknights_user_info_box_bg_img]">
+    <div class="arknights-user-info">
+      <div class="arknights-username">
+        Dr.{{ username }}
       </div>
-
-      <div class="arknights-data-update-box">
-        <div class="arknights_data_update_tips">
-          <p>先去
-            <a href="https://ak.hypergryph.com/" class="arkbights_website_link">官网</a>
-            登录<br>然后点
-            <a href="https://as.hypergryph.com/user/info/v1/token_by_cookie" target="_blank" class="arkbights_website_link">这里</a>
-            获取token
-          </p>
-          <p>复制字段token:"xxxx"引号中间的部分</p>
-        </div>
-        <div class="arknights_data_update_submit_box">
-          <input v-model="arknights_token" class="arknights_data_update_input" placeholder="粘贴token到此处">
-          <div class="arknights_data_update_submit_state">{{ update_submit_state }}</div>
-          <button @click="arknights_data_update_submit" class="arknights_data_update_submit_button">更新</button>
-        </div>
+      <div class="arknights-uid">
+        uid:{{ uid }}
       </div>
-
-      <div class="arknights-general-info-box">
-        <div class="arknights-last-update-time-box">
-          <div class="arknights-last-update-time">
-            数据同步时间<br>
-            {{ last_update_time }}
-          </div>
-        </div>
-        <div class="arknights-general-info-box-2">
-          <span class="arknights-general-info">源石总收入: {{ diamond_income }}</span>
-        </div>
-        <div class="arknights-general-info-box-2">
-          <span class="arknights-general-info">源石总支出: {{ diamond_expenses }}</span>
-        </div>
-        <div class="arknights-general-info-box-2">
-          <span class="arknights-general-info">充值总额: ¥{{ order_total }}</span>
-        </div>
-      </div>
-
-      <div id="character_proportion" class="character-echarts-box"></div>
-
-      <div id="pools_proportion" class="pools-echarts-box"></div>
-
-      <div id="dates_proportion" class="dates-echarts-box"></div>
-
-    </div>
-    <div :class="arknights_query_switch">
-      <button type="button" class="arknights_query_switch_button" @click="general_button_onclick">概况</button>
-      <router-link to="/user/arknights-analysis/general" id="arknights-general" style="display: none" target="_self"></router-link>
-      <button type="button" class="arknights_query_switch_button" @click="gacha_button_onclick">寻访</button>
-      <router-link to="/user/arknights-analysis/gacha" id="arknights-gacha" style="display: none" target="_self"></router-link>
-      <button type="button" class="arknights_query_switch_button" @click="diamond_button_onclick">源石</button>
-      <router-link to="/user/arknights-analysis/diamond" id="arknights-diamond" style="display: none" target="_self"></router-link>
-      <button type="button" class="arknights_query_switch_button" @click="order_button_onclick">充值</button>
-      <router-link to="/user/arknights-analysis/order" id="arknights-order" style="display: none" target="_self"></router-link>
     </div>
   </div>
-
+  <div class="arknights-data-update-box">
+    <div class="arknights_data_update_tips">
+      <p>先去
+        <a href="https://ak.hypergryph.com/" class="arkbights_website_link">官网</a>
+        登录<br>然后点
+        <a href="https://as.hypergryph.com/user/info/v1/token_by_cookie" target="_blank" class="arkbights_website_link">这里</a>
+        获取token
+      </p>
+      <p>复制字段token:"xxxx"引号中间的部分</p>
+    </div>
+    <div class="arknights_data_update_submit_box">
+      <input v-model="arknights_token" class="arknights_data_update_input" placeholder="粘贴token到此处">
+      <div class="arknights_data_update_submit_state">{{ update_submit_state }}</div>
+      <button @click="arknights_data_update_submit" class="arknights_data_update_submit_button">更新</button>
+    </div>
+  </div>
+  <div class="arknights-general-info-box">
+    <div class="arknights-last-update-time-box">
+      <div class="arknights-last-update-time">
+        数据同步时间<br>
+        {{ last_update_time }}
+      </div>
+    </div>
+    <div class="arknights-general-info-box-2">
+      <span class="arknights-general-info">源石总收入: {{ diamond_income }}</span>
+    </div>
+    <div class="arknights-general-info-box-2">
+      <span class="arknights-general-info">源石总支出: {{ diamond_expenses }}</span>
+    </div>
+    <div class="arknights-general-info-box-2">
+      <span class="arknights-general-info">充值总额: ¥{{ order_total }}</span>
+    </div>
+  </div>
+  <div id="character_proportion" class="character-echarts-box"></div>
+  <div id="pools_proportion" class="pools-echarts-box"></div>
+  <div id="dates_proportion" class="dates-echarts-box"></div>
 </template>
 
 <script>
@@ -78,68 +56,40 @@ export default {
   setup() {
 
     let echarts = inject('echarts')
-    let deviceType = ref('')
-    let arknights_general_dev = ref('')
-    let arknights_qurery_box = ref('')
-    let arknights_query_switch = ref('')
-
-
-    function general_button_onclick(){
-      document.getElementById("arknights-general").click()
-    }
-    function gacha_button_onclick(){
-      document.getElementById("arknights-gacha").click()
-    }
-    function diamond_button_onclick(){
-      document.getElementById("arknights-diamond").click()
-    }
-    function order_button_onclick(){
-      document.getElementById("arknights-order").click()
-    }
-
-    function _isMobile() {
-      return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
-    }
-    if (_isMobile()) {
-      deviceType.value = 'mobile'
-      arknights_general_dev.value = 'arknights-general-mobile'
-      arknights_qurery_box.value = 'arknights-qurery-box-mobile'
-      arknights_query_switch.value = 'arknights-query-switch-mobile'
-    } else {
-      deviceType.value = 'pc'
-      arknights_general_dev.value = 'arknights-general-pc'
-      arknights_qurery_box.value = 'arknights-qurery-box-pc'
-      arknights_query_switch.value = 'arknights-query-switch-mobile'
-    }
-
 
     // 设置方舟用户信息卡片背景
     let arknights_user_info_box_bg_img = ref('')
-    let arknights_user_info_box= ref('arknights-user-info-box')
-    function set_ak_user_info_bg(){
-      let ran_num = Math.floor(Math.random()*5)+1;
+    let arknights_user_info_box = ref('arknights-user-info-box')
+
+    function set_ak_user_info_bg() {
+      let ran_num = Math.floor(Math.random() * 5) + 1;
       let bg_img = ''
-      switch (ran_num){
-        case 1: bg_img="arknights-user-info-box_bg_img_1"
+      switch (ran_num) {
+        case 1:
+          bg_img = "arknights-user-info-box_bg_img_1"
           break;
-        case 2: bg_img="arknights-user-info-box_bg_img_2"
+        case 2:
+          bg_img = "arknights-user-info-box_bg_img_2"
           break;
-        case 3: bg_img="arknights-user-info-box_bg_img_3"
+        case 3:
+          bg_img = "arknights-user-info-box_bg_img_3"
           break;
-        case 4: bg_img="arknights-user-info-box_bg_img_4"
+        case 4:
+          bg_img = "arknights-user-info-box_bg_img_4"
           break;
-        case 5: bg_img="arknights-user-info-box_bg_img_5"
+        case 5:
+          bg_img = "arknights-user-info-box_bg_img_5"
           break;
-        case 6: bg_img="arknights-user-info-box_bg_img_6"
+        case 6:
+          bg_img = "arknights-user-info-box_bg_img_6"
           break
-        default: bg_img="arknights-user-info-box_bg_img_7"
+        default:
+          bg_img = "arknights-user-info-box_bg_img_7"
       }
       return bg_img
     }
 
-    arknights_user_info_box_bg_img.value=set_ak_user_info_bg()
-
-
+    arknights_user_info_box_bg_img.value = set_ak_user_info_bg()
 
     // axios数据解析
     let username = ref('')
@@ -160,7 +110,7 @@ export default {
     let order_total = ref(0)
     let last_update_time = ref('')
 
-    function get_general_data(){
+    function get_general_data() {
       axios({
         url: "/user/api/arknights/general",
         method: "get",
@@ -168,20 +118,24 @@ export default {
         let result = response.data;
         let state = result.state;
         let data = result.data;
-        if(state===0){
+        if (state === 0) {
           username.value = data.username;
           uid.value = data.uid;
           six_num = data.six_num;
           five_num = data.five_num;
           four_num = data.four_num;
           three_num = data.three_num;
+          pools_name = []
+          pools_val = []
+          dates_name = []
+          dates_val = []
           let res_pools = data.pools;
-          res_pools.forEach((element)=>{
+          res_pools.forEach((element) => {
             pools_name.push(element.pool)
             pools_val.push(element.gacha_num)
           })
           let res_dates = data.dates;
-          res_dates.forEach((element)=>{
+          res_dates.forEach((element) => {
             dates_name.push(element.date)
             dates_val.push(element.gacha_num)
           })
@@ -190,23 +144,23 @@ export default {
           order_total.value = data.order_total;
           last_update_time.value = new Date().toLocaleString('chinese', {hour12: false})
 
-          let character_total = six_num + five_num + four_num +three_num
+          let character_total = six_num + five_num + four_num + three_num
           characters_chart.setOption({
-            series:[
+            series: [
               {
                 label: {
                   show: true,
                   position: 'center',
-                  formatter: '{total|total}'+ '\n\r' + '{active|'+ character_total +'}',
+                  formatter: '{total|total}' + '\n\r' + '{active|' + character_total + '}',
                   rich: {
-                    total:{
+                    total: {
                       fontSize: 16,
-                      color:'#00000073'
+                      color: '#00000073'
                     },
                     active: {
                       fontSize: 20,
-                      color:'#000',
-                      lineHeight:44,
+                      color: '#000',
+                      lineHeight: 44,
                     },
                   }
                 },
@@ -247,7 +201,7 @@ export default {
           })
 
         }
-      }).catch(()=>{
+      }).catch(() => {
         console.log('从服务器拉取数据失败')
       })
     }
@@ -257,22 +211,24 @@ export default {
     // 数据更新
     let arknights_token = ref('')
     let update_submit_state = ref('')
-    function arknights_data_update_submit(){
+
+    function arknights_data_update_submit() {
+      update_submit_state.value = '数据更新中'
       axios({
         url: "/user/api/arknights",
         method: "post",
         headers: {
           'Content-Type': 'application/json'
         },
-        data: JSON.stringify({token:arknights_token.value}),
-      }).then(response=>{
+        data: JSON.stringify({token: arknights_token.value}),
+      }).then(response => {
         let result = response.data;
         let state = result.state;
-        if(state===0){
+        if (state === 0) {
           update_submit_state.value = '服务器数据更新成功'
           get_general_data()
         }
-      }).catch(()=>{
+      }).catch(() => {
         update_submit_state.value = '数据更新时出现异常'
       })
     }
@@ -280,6 +236,11 @@ export default {
     onMounted(() => {
       characters_chart = echarts.init(document.getElementById("character_proportion"))
       characters_chart.setOption({
+        title: {
+          text: '按寻访结果统计',
+          top: 10,
+          left: 20
+        },
         tooltip: {
           trigger: 'item',
           borderWidth: 2,
@@ -294,12 +255,15 @@ export default {
         },
         legend: {
           orient: 'vertical',
-          left: 'left'
+          top:"22%",
+          left:'10%',
         },
         series: [
           {
             type: 'pie',
-            radius: ['40%','70%'],
+            top:"10%",
+            left:'30%',
+            radius: ['45%', '75%'],
             color: [
               '#ff3600',
               '#fbc600',
@@ -320,16 +284,16 @@ export default {
             label: {
               show: true,
               position: 'center',
-              formatter: '{total|total}'+ '\n\r' + '{active|'+ 0 +'}',
+              formatter: '{total|total}' + '\n\r' + '{active|' + 0 + '}',
               rich: {
-                total:{
+                total: {
                   fontSize: 16,
-                  color:'#00000073'
+                  color: '#00000073'
                 },
                 active: {
                   fontSize: 20,
-                  color:'#000',
-                  lineHeight:44,
+                  color: '#000',
+                  lineHeight: 44,
                 },
               }
             },
@@ -346,9 +310,9 @@ export default {
       pools_chart = echarts.init(document.getElementById("pools_proportion"))
       pools_chart.setOption({
         title: {
-          text: '按月统计',
-          top:10,
-          left:20
+          text: '按卡池统计',
+          top: 10,
+          left: 20
         },
         grid: {
           top: 50,
@@ -364,12 +328,12 @@ export default {
                 color: "rgba(0, 0, 0, 1)"
               }
             },
-            z:5
+            z: 5
           }
         ],
         yAxis: [
           {
-            show:true,
+            show: true,
             type: 'value',
             axisLine: {
               show: true,
@@ -384,7 +348,7 @@ export default {
                 width: 1.5,
               }
             },
-            z:5
+            z: 5
           }
         ],
         dataZoom: [
@@ -399,7 +363,7 @@ export default {
               color: "#256b66",
             },
             handleSize: '150%',
-            borderColor:'rgba(0,0,0,0.25)',
+            borderColor: 'rgba(0,0,0,0.25)',
             backgroundColor: 'rgba(0,0,0,0)',
             dataBackground: {
               lineStyle: {
@@ -410,12 +374,12 @@ export default {
               }
             },
             fillerColor: 'rgba(0,0,0,0.1)',
-            selectedDataBackground:{
-              lineStyle:{
-                color:'#39C5BB'
+            selectedDataBackground: {
+              lineStyle: {
+                color: '#39C5BB'
               },
-              areaStyle:{
-                color:'#66CCFF'
+              areaStyle: {
+                color: '#66CCFF'
               }
             }
           },
@@ -439,19 +403,19 @@ export default {
               trigger: 'axis'
             },
             data: [],
-            itemStyle:{
+            itemStyle: {
               color: '#66ccff'
             },
             markLine: {
-              data: [{ type: 'average', name: 'Avg' }],
-              symbol:['none','circle'],
+              data: [{type: 'average', name: 'Avg'}],
+              symbol: ['none', 'circle'],
               symbolSize: 3,
-              lineStyle:{
+              lineStyle: {
                 color: 'rgba(65,94,154,0.5)',
-                type:'solid',
-                width:1.8,
+                type: 'solid',
+                width: 1.8,
               },
-              label:{
+              label: {
                 textBorderColor: "rgba(0, 0, 0, 0)",
                 color: 'rgba(65,94,154,1)',
                 fontSize: 9
@@ -464,9 +428,9 @@ export default {
       dates_chart = echarts.init(document.getElementById("dates_proportion"))
       dates_chart.setOption({
         title: {
-          text: '按卡池统计',
-          top:10,
-          left:20
+          text: '按月统计',
+          top: 10,
+          left: 20
         },
         grid: {
           top: 50,
@@ -482,12 +446,12 @@ export default {
                 color: "rgba(0, 0, 0, 1)"
               }
             },
-            z:5
+            z: 5
           }
         ],
         yAxis: [
           {
-            show:true,
+            show: true,
             type: 'value',
             axisLine: {
               show: true,
@@ -502,7 +466,7 @@ export default {
                 width: 1.5,
               }
             },
-            z:5
+            z: 5
           }
         ],
         dataZoom: [
@@ -517,7 +481,7 @@ export default {
               color: "#256b66",
             },
             handleSize: '150%',
-            borderColor:'rgba(0,0,0,0.25)',
+            borderColor: 'rgba(0,0,0,0.25)',
             backgroundColor: 'rgba(0,0,0,0)',
             dataBackground: {
               lineStyle: {
@@ -528,12 +492,12 @@ export default {
               }
             },
             fillerColor: 'rgba(0,0,0,0.1)',
-            selectedDataBackground:{
-              lineStyle:{
-                color:'#39C5BB'
+            selectedDataBackground: {
+              lineStyle: {
+                color: '#39C5BB'
               },
-              areaStyle:{
-                color:'#66CCFF'
+              areaStyle: {
+                color: '#66CCFF'
               }
             }
           },
@@ -557,19 +521,19 @@ export default {
               trigger: 'axis'
             },
             data: [],
-            itemStyle:{
+            itemStyle: {
               color: '#66ccff'
             },
             markLine: {
-              data: [{ type: 'average', name: 'Avg' }],
-              symbol:['none','circle'],
+              data: [{type: 'average', name: 'Avg'}],
+              symbol: ['none', 'circle'],
               symbolSize: 3,
-              lineStyle:{
+              lineStyle: {
                 color: 'rgba(65,94,154,0.5)',
-                type:'solid',
-                width:1.8,
+                type: 'solid',
+                width: 1.8,
               },
-              label:{
+              label: {
                 textBorderColor: "rgba(0, 0, 0, 0)",
                 color: 'rgba(65,94,154,1)',
                 fontSize: 9
@@ -588,25 +552,17 @@ export default {
     })
 
     return {
-      deviceType: deviceType,
-      arknights_general_dev: arknights_general_dev,
-      arknights_qurery_box:arknights_qurery_box,
-      arknights_query_switch:arknights_query_switch,
-      general_button_onclick,
-      gacha_button_onclick,
-      diamond_button_onclick,
-      order_button_onclick,
-      arknights_user_info_box_bg_img:arknights_user_info_box_bg_img,
-      arknights_user_info_box:arknights_user_info_box,
-      username:username,
-      uid:uid,
-      last_update_time:last_update_time,
-      diamond_income:diamond_income,
-      diamond_expenses:diamond_expenses,
-      order_total:order_total,
-      arknights_token:arknights_token,
+      arknights_user_info_box_bg_img: arknights_user_info_box_bg_img,
+      arknights_user_info_box: arknights_user_info_box,
+      username: username,
+      uid: uid,
+      last_update_time: last_update_time,
+      diamond_income: diamond_income,
+      diamond_expenses: diamond_expenses,
+      order_total: order_total,
+      arknights_token: arknights_token,
       arknights_data_update_submit,
-      update_submit_state:update_submit_state
+      update_submit_state: update_submit_state
     }
   }
 }
@@ -614,72 +570,8 @@ export default {
 
 <style scoped>
 
-.arknights-general-pc {
-  background: rgba(200, 230, 230, 0.5);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  box-shadow: 6px 6px 2px rgba(50, 50, 50, 0.6);
-  position: fixed;
-  top: 10%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 65%;
-  min-width: 340px;
-  height: 80%;
-}
-.arknights-general-mobile {
-  background: rgba(200, 230, 230, 0.5);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  box-shadow: 6px 6px 2px rgba(50, 50, 50, 0.6);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 80%;
-  min-width: 340px;
-  height: 80%;
-  min-height: 600px;
-  vertical-align: bottom;
-}
-
-.arknights-qurery-box-pc{
-  overflow-x: hidden;
-  overflow-y: visible;
-  width: 100%;
-  height: 90%;
-  text-align: center;
-}
-.arknights-qurery-box-pc::-webkit-scrollbar{
-  display: none;
-  width: 5px;
-  height:10px;
-  background-color:#b5b1b1;
-}
-.arknights-qurery-box-pc::-webkit-scrollbar-track{
-  display: none;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color:black;
-}
-.arknights-qurery-box-pc::-webkit-scrollbar-thumb{
-  display: none;
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color:#b5b1b1;
-}
-.arknights-qurery-box-mobile{
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 100%;
-  height: 90%;
-}
-
-.arknights-user-info-box{
-  background-color: rgba(100,100,100,0.15);
+.arknights-user-info-box {
+  background-color: rgba(100, 100, 100, 0.15);
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
   /*background-image: url("../assets/arknights_logos/5.png");*/
   background-size: contain;
@@ -697,26 +589,33 @@ export default {
   margin-right: 10px;
   margin-top: 20px;
 }
-.arknights-user-info-box_bg_img_1{
+
+.arknights-user-info-box_bg_img_1 {
   background-image: url('../assets/arknights_logos/1.png')
 }
-.arknights-user-info-box_bg_img_2{
+
+.arknights-user-info-box_bg_img_2 {
   background-image: url('../assets/arknights_logos/2.png')
 }
-.arknights-user-info-box_bg_img_3{
+
+.arknights-user-info-box_bg_img_3 {
   background-image: url('../assets/arknights_logos/3.png')
 }
-.arknights-user-info-box_bg_img_4{
+
+.arknights-user-info-box_bg_img_4 {
   background-image: url('../assets/arknights_logos/4.png')
 }
-.arknights-user-info-box_bg_img_5{
+
+.arknights-user-info-box_bg_img_5 {
   background-image: url('../assets/arknights_logos/5.png')
 }
-.arknights-user-info-box_bg_img_6{
+
+.arknights-user-info-box_bg_img_6 {
   background-image: url('../assets/arknights_logos/6.png')
 }
-.arknights-user-info{
-  background-color: rgba(0,0,0,0.35);
+
+.arknights-user-info {
+  background-color: rgba(0, 0, 0, 0.35);
   box-shadow: 2px 2px 2px rgba(50, 50, 50, 0.6);
   border-radius: 10px;
   float: right;
@@ -725,28 +624,30 @@ export default {
   margin-right: 7%;
   padding: 3% 3%;
   transform-origin: center;
-  transform: skew(-10deg,0);
+  transform: skew(-10deg, 0);
 }
-.arknights-username{
+
+.arknights-username {
   width: 70%;
-  font-family: Consolas,"Microsoft YaHei UI",sans-serif;
+  font-family: Consolas, "Microsoft YaHei UI", sans-serif;
   font-weight: bold;
   font-size: 20px;
   color: white;
   text-shadow: 2px 2px 0 rgba(57, 197, 187, 0.6);
 }
-.arknights-uid{
+
+.arknights-uid {
   margin-top: 1%;
   width: 70%;
-  font-family: Consolas,"Microsoft YaHei UI",sans-serif;
+  font-family: Consolas, "Microsoft YaHei UI", sans-serif;
   font-weight: normal;
   font-size: 16px;
   color: white;
   text-shadow: 1px 1px 0 rgba(57, 197, 187, 0.6);
 }
 
-.arknights-data-update-box{
-  background-color: rgba(100,100,100,0.15);
+.arknights-data-update-box {
+  background-color: rgba(100, 100, 100, 0.15);
   display: inline-block;
   vertical-align: top;
   border-radius: 20px;
@@ -760,24 +661,28 @@ export default {
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
   text-align: center;
 }
-.arknights_data_update_tips{
+
+.arknights_data_update_tips {
   font-size: 15px;
   display: inline-block;
   margin-top: 5px;
   text-align: left;
-  font-family: Consolas,"Microsoft YaHei UI",sans-serif;
+  font-family: Consolas, "Microsoft YaHei UI", sans-serif;
 }
-.arkbights_website_link, .arkbights_website_link:visited{
+
+.arkbights_website_link, .arkbights_website_link:visited {
   text-decoration: none;
   color: #00c3e7;
   font-weight: bold;
 }
-.arkbights_website_link:hover{
+
+.arkbights_website_link:hover {
   text-decoration: none;
   color: #00a2e7;
   font-weight: bold;
 }
-.arknights_data_update_input{
+
+.arknights_data_update_input {
   border: #39C5BB solid 2px;
   background-color: rgba(255, 255, 255, 0.8);
   display: inline-block;
@@ -793,7 +698,8 @@ export default {
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
 }
-.arknights_data_update_input:hover{
+
+.arknights_data_update_input:hover {
   border: #39C5BB solid 2px;
   background-color: rgba(200, 200, 200, 0.3);
   display: inline-block;
@@ -808,7 +714,8 @@ export default {
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
 }
-.arknights_data_update_input:focus{
+
+.arknights_data_update_input:focus {
   border: #00ffea solid 2px;
   background-color: rgba(50, 50, 50, 0.8);
   display: inline-block;
@@ -827,18 +734,21 @@ export default {
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
 }
-.arknights_data_update_submit_box{
+
+.arknights_data_update_submit_box {
   display: inline-block;
   width: 85%;
   text-align: right;
 }
-.arknights_data_update_submit_state{
+
+.arknights_data_update_submit_state {
   display: inline-block;
   float: left;
   margin-top: 17px;
   margin-left: 25px;
 }
-.arknights_data_update_submit_button{
+
+.arknights_data_update_submit_button {
   border: #39C5BB solid 2px;
   background-color: rgba(255, 255, 255, 0.8);
   color: black;
@@ -853,7 +763,8 @@ export default {
   box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
 }
-.arknights_data_update_submit_button:hover{
+
+.arknights_data_update_submit_button:hover {
   border: #39C5BB solid 2px;
   background-color: rgba(200, 200, 200, 0.3);
   color: black;
@@ -868,7 +779,8 @@ export default {
   box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
   transition: 0.3s;
 }
-.arknights_data_update_submit_button:active{
+
+.arknights_data_update_submit_button:active {
   border: #00ffea solid 2px;
   background-color: rgba(50, 50, 50, 0.8);
   color: #39C5BB;
@@ -884,8 +796,8 @@ export default {
   transition: 1ms;
 }
 
-.arknights-general-info-box{
-  background-color: rgba(100,100,100,0.15);
+.arknights-general-info-box {
+  background-color: rgba(100, 100, 100, 0.15);
   display: inline-block;
   vertical-align: top;
   border-radius: 20px;
@@ -899,31 +811,35 @@ export default {
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
   text-align: center;
 }
-.arknights-last-update-time-box{
+
+.arknights-last-update-time-box {
   width: 100%;
   height: 20%;
   margin-top: 5%;
   margin-bottom: 3%;
 }
-.arknights-last-update-time{
+
+.arknights-last-update-time {
   font-size: 14px;
-  color: rgba(0,0,0,0.7);
-  font-family: Consolas,"Microsoft YaHei UI",sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+  font-family: Consolas, "Microsoft YaHei UI", sans-serif;
 }
+
 .arknights-general-info-box-2 {
   width: 100%;
   height: 15%;
   margin-top: 2%;
 }
-.arknights-general-info{
+
+.arknights-general-info {
   float: left;
   margin-left: 30%;
   font-size: 16px;
-  font-family: Consolas,"Microsoft YaHei UI",sans-serif;
+  font-family: Consolas, "Microsoft YaHei UI", sans-serif;
 }
 
 .character-echarts-box {
-  background-color: rgba(100,100,100,0.15);
+  background-color: rgba(100, 100, 100, 0.15);
   display: inline-block;
   vertical-align: top;
   border-radius: 20px;
@@ -937,8 +853,8 @@ export default {
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
 }
 
-.pools-echarts-box{
-  background-color: rgba(100,100,100,0.15);
+.pools-echarts-box {
+  background-color: rgba(100, 100, 100, 0.15);
   display: inline-block;
   vertical-align: top;
   border-radius: 20px;
@@ -952,8 +868,8 @@ export default {
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
 }
 
-.dates-echarts-box{
-  background-color: rgba(100,100,100,0.15);
+.dates-echarts-box {
+  background-color: rgba(100, 100, 100, 0.15);
   display: inline-block;
   vertical-align: top;
   border-radius: 20px;
@@ -965,68 +881,6 @@ export default {
   margin-right: 10px;
   margin-top: 20px;
   box-shadow: 2px 2px 4px rgba(50, 50, 50, 0.6);
-}
-
-.arknights-query-switch-pc{
-  width: 100%;
-  height: 10%;
-  text-align: center;
-}
-.arknights-query-switch-mobile {
-  width: 100%;
-  height: 10%;
-  text-align: center;
-}
-.arknights_query_switch_button{
-  border: #39C5BB solid 2px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: black;
-  display: inline-block;
-  width: 22%;
-  height: 40px;
-  margin-top: 6px;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  box-shadow: 3px 3px 2px rgba(50, 50, 50, 0.6);
-  transition: 0.3s;
-}
-.arknights_query_switch_button:hover{
-  border: #39C5BB solid 2px;
-  background-color: rgba(200, 200, 200, 0.3);
-  color: black;
-  display: inline-block;
-  width: 22%;
-  height: 40px;
-  margin-top: 6px;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  box-shadow: 7px 7px 2px rgba(50, 50, 50, 0.6);
-  transition: 0.3s;
-}
-.arknights_query_switch_button:active{
-  border: #00ffea solid 2px;
-  background-color: rgba(50, 50, 50, 0.8);
-  color: #39C5BB;
-  display: inline-block;
-  width: 22%;
-  height: 40px;
-  margin-top: 6px;
-  margin-left: 1%;
-  margin-right: 1%;
-  border-radius: 10px;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
-  font-weight: normal;
-  font-size: 18px;
-  box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.6);
-  transition: 1ms;
 }
 
 input:hover::placeholder, input:focus::placeholder {
