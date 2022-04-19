@@ -97,6 +97,7 @@ export default {
   border-radius: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
+  box-shadow: 3px 5px 4px rgba(50, 50, 50, 0.6);
 }
 .arknights_diamond_table_head{
   width: 100%;
@@ -122,8 +123,8 @@ export default {
 
 .arknights_diamond_table_body_box{
   position: absolute;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow-x: visible;
+  overflow-y: scroll;
   width: 90%;
   max-height: 80%;
   border-radius: 5px;
@@ -159,7 +160,7 @@ export default {
 }
 .arknights-diamond-table-current-column-body{
   border-radius: 0 5px 5px 0;
-  width: 13%
+  width: 13%;
 }
 
 </style>

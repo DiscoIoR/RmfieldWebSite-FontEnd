@@ -20,7 +20,6 @@ const routes = [
     {
         path: '/user',
         component: UserApp,
-        // meta: {auth:true}
         children: [
             {
                 path: 'arknights-analysis',
