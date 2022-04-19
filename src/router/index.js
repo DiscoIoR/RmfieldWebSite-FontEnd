@@ -11,15 +11,18 @@ import ArknightsGeneral from "@/components/ArknightsGeneral";
 import ArknightsGacha from "@/components/ArknightsGacha";
 import ArknightsDiamond from "@/components/ArknightsDiamond";
 import ArknightsOrder from "@/components/ArknightsOrder";
+import store from "@/store";
 
 const routes = [
     {
         path: '/',
-        component: App
+        component: App,
+        meta: { requiresAuth: false },
     },
     {
         path: '/user',
         component: UserApp,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: 'arknights-analysis',
@@ -49,25 +52,25 @@ const routes = [
             }
         ]
     }
-    // {
-    //     path: '/',
-    //     components:{
-    //         m1:Base,
-    //         m2:LoginRegisterPanel
-    //     }
-    // },
-    // {
-    //     path: '/user',
-    //     components:{
-    //         m1:Base,
-    //         m2:NavigationBar
-    //     }
-    // }
 ]
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes,
+})
+
+router.beforeEach((to,from,next)=>{
+    if (to.meta.requiresAuth && !store.state.isLogin ) {
+        // 此路由需要授权，请检查是否已登录
+        // 如果没有，则重定向到登录页面
+        next({
+            path: '/',
+            // 保存我们所在的位置，以便以后再来
+            query: { redirect: to.fullPath },
+        })
+    }else {
+        next()
+    }
 })
 
 export default router

@@ -2,15 +2,15 @@
   <div v-if="deviceType==='pc'" class="navigation-bar">
     <div class="navigation-bar-user">
       <div class="navigation-bar-user-content-logout" @click="clickLogout" v-if="state_ctrl_2!==''">
-        {{ state_ctrl_2 }}
-        <router-link :to="state_ctrl_2_url" id="home" style="display: none" target="_self"></router-link>
+        Logout
+<!--        <router-link to="/" id="logout" style="display: none" target="_self"></router-link>-->
       </div>
       <div class="navigation-bar-user-content-divide" v-if="(state_ctrl_1!=='')&&(state_ctrl_2!=='')">
         |
       </div>
       <div class="navigation-bar-user-content-home" @click="clickHome" v-if="state_ctrl_1!==''">
-        {{state_ctrl_1}}
-        <router-link :to="state_ctrl_1_url" id="logout" style="display: none" target="_self"></router-link>
+        Home
+        <router-link to="/user" id="home" style="display: none" target="_self"></router-link>
       </div>
     </div>
     <div class="navigation-bar-element" v-if="element_1!==''">
@@ -74,6 +74,8 @@
 
 <script>
 import {onMounted, ref} from 'vue'
+import router from "@/router";
+// import store from "@/store";
 
 export default {
   name: "NavigationBar-Components",
@@ -124,7 +126,10 @@ export default {
       document.getElementById("home").click();
     }
     function clickLogout(){
-      document.getElementById("logout").click();
+      window.sessionStorage.clear()
+      let targetPath = '/'
+      router.push({path:targetPath})
+      // document.getElementById("logout").click();
     }
     function clickElement1(){
       document.getElementById("element1").click();

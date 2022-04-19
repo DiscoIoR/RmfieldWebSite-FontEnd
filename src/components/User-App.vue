@@ -1,10 +1,6 @@
 <template>
   <Base />
   <NavigationBar
-      :state_ctrl_1="state_ctrl_1"
-      :state_ctrl_1_url="state_ctrl_1_url"
-      :state_ctrl_2="state_ctrl_2"
-      :state_ctrl_2_url="state_ctrl_2_url"
       :element_1="element_1"
       :element_1_url="element_1_url"
       :element_2="element_2"
@@ -28,10 +24,6 @@ export default {
   },
   setup:function (){
     return{
-      state_ctrl_1:'Home',
-      state_ctrl_1_url:'/user',
-      state_ctrl_2:'Logout',
-      state_ctrl_2_url:'/',
       element_1:'Arknights Analysis',
       element_1_url:'/user/arknights-analysis/general',
       element_2:'',

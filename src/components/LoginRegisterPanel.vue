@@ -7,10 +7,8 @@
             <img src="../assets/error.png" alt="" class="register-result-error-image">
             <div class="register-result-error-text">
               <span>register failed</span>
-              <p class="register-result-error-text-details">This could be because the username already exist or the
-                invitation code is incorrect.</p>
-              <p class="register-result-error-text-details">However, login failures due to server or network problems
-                cannot be ruled out.</p>
+              <p class="register-result-error-text-details">可能是用户名已存在或邀请码错误导致的注册失败.</p>
+              <p class="register-result-error-text-details">然而,并不能排除这是网络连接问题或服务器发生错误导致的.</p>
             </div>
           </div>
         </div>
@@ -84,9 +82,8 @@
             <img src="../assets/error.png" alt="" class="login-error-image">
             <div class="login-error-text">
               <span>login failed</span>
-              <p class="login-error-text-details">This could be because you entered the wrong username or password.</p>
-              <p class="login-error-text-details">However, login failures due to server or network problems cannot be
-                ruled out.</p>
+              <p class="login-error-text-details">可能是用户名或密码错误导致的登录失败.</p>
+              <p class="login-error-text-details">然而,并不能排除这是网络连接问题或服务器发生错误导致的.</p>
             </div>
           </div>
         </div>
@@ -109,8 +106,9 @@
 
 <script>
 import {ref} from "vue";
-//import {useStore} from "vuex";
 import axios from 'axios'
+import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "LoginRegisterPanel-Components",
@@ -149,10 +147,10 @@ export default {
     function set_username_error() {
       let str = register_input_username.value
       if (str === '') {
-        username_error_detail.value = 'username can not be empty'
+        username_error_detail.value = '用户名不能为空'
         username_error.value = true
       } else {
-        username_error_detail.value = 'special characters are not allowed'
+        username_error_detail.value = '不允许使用特殊字符'
         username_error.value = check_invalid_char(str)
       }
     }
@@ -164,10 +162,10 @@ export default {
     function set_password_error() {
       let str = register_input_password.value
       if (str === '') {
-        password_error_detail.value = 'password can not be empty'
+        password_error_detail.value = '密码不能为空'
         password_error.value = true
       } else {
-        password_error_detail.value = 'special characters are not allowed'
+        password_error_detail.value = '不允许使用特殊字符'
         password_error.value = check_invalid_char(str)
       }
     }
@@ -178,7 +176,7 @@ export default {
 
     function set_repassword_error() {
       if (register_input_repassword.value !== register_input_password.value) {
-        repassword_error_detail.value = 'password mismatch'
+        repassword_error_detail.value = '两次输入密码不一致'
         repassword_error.value = true
       } else {
         repassword_error.value = false
@@ -207,7 +205,7 @@ export default {
     function set_invitationcode_error() {
       let str = register_input_invitationcode.value
       if (str === '') {
-        invitationcode_error_detail.value = 'invitation code can not be empty'
+        invitationcode_error_detail.value = '邀请码不能为空'
         invitationcode_error.value = true
       } else {
         invitationcode_error.value = false
@@ -242,11 +240,28 @@ export default {
           username: register_input_username.value,
           password: register_input_password.value,
           realname: register_input_realname.value,
-          invitationCode: register_input_invitationcode.value
+          invitationcode: register_input_invitationcode.value
         }),
       }).then(response => {
-        let jsonResult = response.data;
-        register_result.value = jsonResult.state
+        let data = response.data;
+        switch (data.data){
+          case '注册成功':
+            change_login_register_card_box_state();
+            break;
+          case "用户名已存在":
+            username_error_detail.value = '用户名已存在';
+            username_error.value = true;
+            register_result.value = 1;
+            break;
+          case "邀请码错误":
+            invitationcode_error_detail.value = '邀请码错误';
+            invitationcode_error.value = true;
+            register_result.value = 1;
+            break;
+          case "注册失败":
+            register_result.value = 1;
+            break;
+        }
       }).catch(() => {
         register_result.value = 1
       })
@@ -274,8 +289,16 @@ export default {
           password: login_input_password.value
         }),
       }).then(response => {
-        let jsonResult = response.data;
-        login_result.value = jsonResult.state
+        let data = response.data
+        login_result.value = data.state
+        if(data.state === 0){
+          store.commit('changeLoginState',data.data.username)
+          let targetPath = '/user'
+          if (router.currentRoute.value.query.redirect){
+            targetPath = router.currentRoute.value.query.redirect
+          }
+          router.push({path:targetPath})
+        }
       }).catch(() => {
         login_result.value = 1
       })
@@ -417,12 +440,14 @@ export default {
   position: absolute;
   margin-left: 10px;
   margin-top: 0;
-  font-family: Bradley Hand ITC, Consolas, NewFontXingshu, sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
   font-weight: bold;
 }
 
 .login-error-text-details {
-  font-family: "Bradley Hand ITC TT Italic", sans-serif;
+  margin-right: 20px;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
+  font-weight: normal;
   color: #39C5BB;
 }
 
@@ -660,7 +685,9 @@ export default {
 }
 
 .register-result-error-text-details {
-  font-family: "Bradley Hand ITC TT Italic", sans-serif;
+  margin-right: 20px;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
+  font-weight: normal;
   color: #39C5BB;
 }
 
@@ -769,7 +796,8 @@ export default {
 }
 
 .register-error-details {
-  font-family: "Bradley Hand ITC", sans-serif;
+  font-family: Bradley Hand ITC, Consolas, NewFontXingshu_2, sans-serif;
+  font-weight: normal;
   color: #39C5BB;
 }
 
