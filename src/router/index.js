@@ -61,7 +61,7 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-    //如果访问需要授权,则校验登录状态
+    //如果访问的url需要授权,则校验登录状态
     if (to.meta.requiresAuth) {
         let token = getCookie('token')
         axios({
