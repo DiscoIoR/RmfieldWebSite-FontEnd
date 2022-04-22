@@ -1,14 +1,14 @@
 <template>
   <div v-if="deviceType==='pc'" class="navigation-bar">
     <div class="navigation-bar-user">
-      <div class="navigation-bar-user-content-logout" @click="clickLogout" v-if="state_ctrl_2!==''">
+      <div class="navigation-bar-user-content-logout" @click="clickLogout">
         Logout
 <!--        <router-link to="/" id="logout" style="display: none" target="_self"></router-link>-->
       </div>
-      <div class="navigation-bar-user-content-divide" v-if="(state_ctrl_1!=='')&&(state_ctrl_2!=='')">
+      <div class="navigation-bar-user-content-divide">
         |
       </div>
-      <div class="navigation-bar-user-content-home" @click="clickHome" v-if="state_ctrl_1!==''">
+      <div class="navigation-bar-user-content-home" @click="clickHome">
         Home
         <router-link to="/user" id="home" style="display: none" target="_self"></router-link>
       </div>
@@ -41,12 +41,12 @@
 
   <div v-if="deviceType==='mobile'" :class="navigation_bar_mobile">
     <div class="navigation-bar-mobile-user">
-      <div class="navigation-bar-mobile-user-content-home" v-if="state_ctrl_1!==''">
-        <router-link :to="state_ctrl_1_url" class="navigation-bar-mobile-user-link">{{ state_ctrl_1 }}</router-link>
+      <div class="navigation-bar-mobile-user-content-home">
+        <router-link to="/user" class="navigation-bar-mobile-user-link">Home</router-link>
       </div>
       <br>
-      <div class="navigation-bar-mobile-user-content-logout" v-if="state_ctrl_2!==''">
-        <router-link :to="state_ctrl_2_url" class="navigation-bar-mobile-user-link">{{ state_ctrl_2 }}</router-link>
+      <div class="navigation-bar-mobile-user-content-logout">
+        <router-link to="/" class="navigation-bar-mobile-user-link" @click="clickLogout">Logout</router-link>
       </div>
     </div>
     <div class="navigation-bar-mobile-element" v-if="element_1!==''">
@@ -75,7 +75,8 @@
 <script>
 import {onMounted, ref} from 'vue'
 import router from "@/router";
-// import store from "@/store";
+import axios from "axios";
+import {getCookie} from "@/router/getCookie";
 
 export default {
   name: "NavigationBar-Components",
@@ -94,6 +95,8 @@ export default {
     element_4_url:String,
 },
   setup() {
+    let token = getCookie('token')
+
     let deviceType = ref('')
     function _isMobile(){
       return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
@@ -129,7 +132,14 @@ export default {
       window.sessionStorage.clear()
       let targetPath = '/'
       router.push({path:targetPath})
-      // document.getElementById("logout").click();
+      axios({
+        url:'/api/logout',
+        method:'get',
+        headers: {
+          'Content-Type': 'application/json',
+          'token': token
+        }
+      })
     }
     function clickElement1(){
       document.getElementById("element1").click();

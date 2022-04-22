@@ -50,10 +50,12 @@
 <script>
 import {inject, onMounted, ref} from "vue";
 import axios from "axios";
+import {getCookie} from "@/router/getCookie";
 
 export default {
   name: "ArknightsGeneral-Components",
   setup() {
+    let token = getCookie('token')
 
     let echarts = inject('echarts')
 
@@ -114,11 +116,15 @@ export default {
       axios({
         url: "/user/api/arknights/general",
         method: "get",
+        headers: {
+          'Content-Type': 'application/json',
+          'token': token
+        },
       }).then(response => {
         let result = response.data;
-        let state = result.state;
+        let status = result.status;
         let data = result.data;
-        if (state === 0) {
+        if (status === 0) {
           username.value = data.username;
           uid.value = data.uid;
           six_num = data.six_num;
@@ -218,7 +224,8 @@ export default {
         url: "/user/api/arknights",
         method: "post",
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'token': token
         },
         data: JSON.stringify({token: arknights_token.value}),
       }).then(response => {

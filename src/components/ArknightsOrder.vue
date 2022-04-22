@@ -35,20 +35,26 @@
 <script>
 import {ref} from "vue";
 import axios from "axios";
+import {getCookie} from "@/router/getCookie";
 
 export default {
   name: "ArknightsOrder-Components",
   setup(){
+    let token = getCookie('token')
 
     let results = ref([])
 
     axios({
       url:"/user/api/arknights/order",
-      method:"get"
+      method:"get",
+      headers: {
+        'Content-Type': 'application/json',
+        'token': token
+      }
     }).then(response => {
-      let state = response.data.state;
-      if(state===0){
-        results.value = response.data.data
+      let status = response.data.status;
+      if(status===0){
+        results.value = response.data.data.order_list
       }
     }).catch(()=>{
       console.log('从服务器拉取数据失败')

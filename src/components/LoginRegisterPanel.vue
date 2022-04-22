@@ -107,12 +107,28 @@
 <script>
 import {ref} from "vue";
 import axios from 'axios'
-import store from "@/store";
 import router from "@/router";
+import {getCookie} from "@/router/getCookie";
 
 export default {
   name: "LoginRegisterPanel-Components",
   setup() {
+    let token = getCookie('token')
+    if(token!==""){
+      axios({
+        url: "/api/islogin",
+        method: "get",
+        headers: {
+          'Content-Type': 'application/json',
+          'token': token
+        }
+      }).then(response => {
+        if(response.data === true){
+          router.push({path:'/user'})
+        }
+      })
+    }
+
     function sleep(time) {
       return new Promise((resolve) => setTimeout(resolve, time));
     }
@@ -245,7 +261,7 @@ export default {
       }).then(response => {
         let data = response.data;
         switch (data.data){
-          case '注册成功':
+          case 'OK':
             change_login_register_card_box_state();
             break;
           case "用户名已存在":
@@ -287,12 +303,17 @@ export default {
         data: JSON.stringify({
           username: login_input_username.value,
           password: login_input_password.value
-        }),
+        })
       }).then(response => {
         let data = response.data
-        login_result.value = data.state
-        if(data.state === 0){
-          store.commit('changeLoginState',data.data.username)
+        login_result.value = data.status
+        if(data.status === 0){
+          let token = data.data.token
+          //储存cookie
+          let cookie_exp_ms = 365*24*60*60*1000;
+          let cookie_exp_date = new Date();
+          cookie_exp_date.setTime(cookie_exp_date.getTime() + cookie_exp_ms);
+          document.cookie = "token="+token+";expires="+cookie_exp_date.toGMTString()
           let targetPath = '/user'
           if (router.currentRoute.value.query.redirect){
             targetPath = router.currentRoute.value.query.redirect

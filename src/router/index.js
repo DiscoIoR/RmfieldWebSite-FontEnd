@@ -6,12 +6,13 @@ import UserApp from "@/components/User-App";
 // import Base from "@/components/Base";
 // import LoginRegisterPanel from "@/components/LoginRegisterPanel";
 // import NavigationBar from "@/components/NavigationBar";
+import {getCookie} from "./getCookie.js"
 import ArknightsAnalysisApp from "@/components/ArknightsAnalysis-App";
 import ArknightsGeneral from "@/components/ArknightsGeneral";
 import ArknightsGacha from "@/components/ArknightsGacha";
 import ArknightsDiamond from "@/components/ArknightsDiamond";
 import ArknightsOrder from "@/components/ArknightsOrder";
-import store from "@/store";
+import axios from "axios";
 
 const routes = [
     {
@@ -60,13 +61,34 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-    if (to.meta.requiresAuth && !store.state.isLogin ) {
-        // 此路由需要授权，请检查是否已登录
-        // 如果没有，则重定向到登录页面
-        next({
-            path: '/',
-            // 保存我们所在的位置，以便以后再来
-            query: { redirect: to.fullPath },
+    //如果访问需要授权,则校验登录状态
+    if (to.meta.requiresAuth) {
+        let token = getCookie('token')
+        axios({
+            url: "/api/islogin",
+            method: "get",
+            headers: {
+                'Content-Type': 'application/json',
+                'token': token
+            }
+        }).then(response => {
+            if(response.data === true){
+                next()
+            }else {
+                //未登录则重定向到登陆页面
+                next({
+                    path: '/',
+                    // 保存当前位置，用于重定向
+                    query: { redirect: to.fullPath },
+                })
+            }
+        }).catch(()=>{
+            //未登录则重定向到登陆页面
+            next({
+                path: '/',
+                // 保存当前位置，用于重定向
+                query: { redirect: to.fullPath },
+            })
         })
     }else {
         next()
