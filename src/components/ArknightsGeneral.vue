@@ -230,10 +230,12 @@ export default {
         data: JSON.stringify({token: arknights_token.value}),
       }).then(response => {
         let result = response.data;
-        let state = result.state;
-        if (state === 0) {
+        let status = result.status;
+        if (status === 0) {
           update_submit_state.value = '服务器数据更新成功'
           get_general_data()
+        }else {
+          update_submit_state.value = '数据更新时出现异常'
         }
       }).catch(() => {
         update_submit_state.value = '数据更新时出现异常'
