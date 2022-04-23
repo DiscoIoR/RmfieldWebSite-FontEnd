@@ -39,7 +39,7 @@
       <span class="arknights-general-info">源石总支出: {{ diamond_expenses }}</span>
     </div>
     <div class="arknights-general-info-box-2">
-      <span class="arknights-general-info">充值总额: ¥{{ order_total }}</span>
+      <span class="arknights-general-info">充值总额: ¥{{ (order_total/100).toFixed(2) }}</span>
     </div>
   </div>
   <div id="character_proportion" class="character-echarts-box"></div>

@@ -40,6 +40,9 @@
   </div>
 
   <div v-if="deviceType==='mobile'" :class="navigation_bar_mobile">
+    <div :class="navigation_bar_mobile_menu_button" @click="handleMenuClick">
+      MENU
+    </div>
     <div class="navigation-bar-mobile-user">
       <div class="navigation-bar-mobile-user-content-home">
         <router-link to="/user" class="navigation-bar-mobile-user-link">Home</router-link>
@@ -102,7 +105,8 @@ export default {
       return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
     }
 
-    const navigation_bar_mobile = ref('navigation_bar_mobile_before_slide')
+    let navigation_bar_mobile_menu_button = ref('navigation_bar_mobile_menu_button_before')
+    let navigation_bar_mobile = ref('navigation_bar_mobile_before_slide')
     let positionX_start = 0
     let positionX_end = 0
     let positionY_start = 0
@@ -119,9 +123,20 @@ export default {
       if (Math.abs(moveY/moveX)<=1){
         if (moveX < 0) {
           navigation_bar_mobile.value = 'navigation_bar_mobile_after_slide';
+          navigation_bar_mobile_menu_button.value= 'navigation_bar_mobile_menu_button_after'
         } else if (moveX > 0) {
           navigation_bar_mobile.value = 'navigation_bar_mobile_before_slide';
+          navigation_bar_mobile_menu_button.value= 'navigation_bar_mobile_menu_button_before'
         }
+      }
+    }
+    function handleMenuClick(){
+      if(navigation_bar_mobile.value === 'navigation_bar_mobile_before_slide'){
+        navigation_bar_mobile.value = 'navigation_bar_mobile_after_slide';
+        navigation_bar_mobile_menu_button.value= 'navigation_bar_mobile_menu_button_after'
+      } else if(navigation_bar_mobile.value === 'navigation_bar_mobile_after_slide'){
+        navigation_bar_mobile.value = 'navigation_bar_mobile_before_slide';
+        navigation_bar_mobile_menu_button.value= 'navigation_bar_mobile_menu_button_before'
       }
     }
 
@@ -167,6 +182,8 @@ export default {
 
     return {
       navigation_bar_mobile:navigation_bar_mobile,
+      navigation_bar_mobile_menu_button:navigation_bar_mobile_menu_button,
+      handleMenuClick,
       deviceType:deviceType,
       clickHome,
       clickLogout,
@@ -282,6 +299,32 @@ export default {
   transition: 0.2s;
 }
 
+.navigation_bar_mobile_menu_button_before{
+  text-align: center;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 7px;
+  padding: 3px;
+  box-shadow: 2px 2px 2px rgba(50, 50, 50, 0.3);
+  font-family: "Microsoft YaHei UI", sans-serif;
+  position: fixed;
+  left: 80%;
+  transition-duration: 0.3s;
+  z-index: 100;
+}
+.navigation_bar_mobile_menu_button_after{
+  text-align: center;
+  color: white;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 12px;
+  padding: 3px;
+  box-shadow: 2px 2px 2px rgba(200, 200, 200, 0.3);
+  font-family: "Microsoft YaHei UI", sans-serif;
+  position: fixed;
+  left: 58%;
+  transition-duration: 0.3s;
+  z-index: 101;
+}
 .navigation_bar_mobile_before_slide{
   position: fixed;
   border-radius: 12px;
@@ -292,7 +335,7 @@ export default {
   width: 40%;
   top: 2%;
   left: 105%;
-  z-index: 100;
+  z-index: 101;
 }
 .navigation_bar_mobile_after_slide{
   position: fixed;
