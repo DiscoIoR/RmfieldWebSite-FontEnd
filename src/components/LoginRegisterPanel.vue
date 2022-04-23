@@ -260,9 +260,10 @@ export default {
         }),
       }).then(response => {
         let data = response.data;
-        switch (data.data){
+        switch (data.msg){
           case 'OK':
-            change_login_register_card_box_state();
+            register_result.value = 0;
+            change_login_register_card_box_state()
             break;
           case "用户名已存在":
             username_error_detail.value = '用户名已存在';
