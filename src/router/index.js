@@ -1,17 +1,17 @@
 import * as VueRouter from 'vue-router'
 
-import App from "@/components/Login-App";
-import UserApp from "@/components/User-App";
+import App from "@/components/Public/Login-App";
+import UserApp from "@/components/User/User-App";
 
 // import Base from "@/components/Base";
 // import LoginRegisterPanel from "@/components/LoginRegisterPanel";
 // import NavigationBar from "@/components/NavigationBar";
-import {getCookie} from "./getCookie.js"
-import ArknightsAnalysisApp from "@/components/ArknightsAnalysis-App";
-import ArknightsGeneral from "@/components/ArknightsGeneral";
-import ArknightsGacha from "@/components/ArknightsGacha";
-import ArknightsDiamond from "@/components/ArknightsDiamond";
-import ArknightsOrder from "@/components/ArknightsOrder";
+import {getCookie} from "@/router/getCookie";
+import ArknightsAnalysisApp from "@/components/User/Arknights/ArknightsAnalysis-App";
+import ArknightsGeneral from "@/components/User/Arknights/ArknightsGeneral";
+import ArknightsGacha from "@/components/User/Arknights/ArknightsGacha";
+import ArknightsDiamond from "@/components/User/Arknights/ArknightsDiamond";
+import ArknightsOrder from "@/components/User/Arknights/ArknightsOrder";
 import axios from "axios";
 
 const routes = [

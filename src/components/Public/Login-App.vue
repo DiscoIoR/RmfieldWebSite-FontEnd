@@ -6,7 +6,7 @@
 
 <script>
 import Base from "@/components/Base";
-import LoginRegisterPanel from "@/components/LoginRegisterPanel";
+import LoginRegisterPanel from "@/components/Public/LoginRegisterPanel";
 import Footer from "@/components/Footer";
 
 export default {

@@ -620,27 +620,27 @@ export default {
 }
 
 .arknights-user-info-box_bg_img_1 {
-  background-image: url('../assets/arknights_logos/1.png')
+  background-image: url('/src/assets/arknights_logos/1.png')
 }
 
 .arknights-user-info-box_bg_img_2 {
-  background-image: url('../assets/arknights_logos/2.png')
+  background-image: url('/src/assets/arknights_logos/2.png')
 }
 
 .arknights-user-info-box_bg_img_3 {
-  background-image: url('../assets/arknights_logos/3.png')
+  background-image: url("/src/assets/arknights_logos/3.png")
 }
 
 .arknights-user-info-box_bg_img_4 {
-  background-image: url('../assets/arknights_logos/4.png')
+  background-image: url('/src/assets/arknights_logos/4.png')
 }
 
 .arknights-user-info-box_bg_img_5 {
-  background-image: url('../assets/arknights_logos/5.png')
+  background-image: url('/src/assets/arknights_logos/5.png')
 }
 
 .arknights-user-info-box_bg_img_6 {
-  background-image: url('../assets/arknights_logos/6.png')
+  background-image: url('/src/assets/arknights_logos/6.png')
 }
 
 .arknights-user-info {
