@@ -307,8 +307,8 @@ export default {
   padding: 3px;
   box-shadow: 2px 2px 2px rgba(50, 50, 50, 0.3);
   font-family: "Microsoft YaHei UI", sans-serif;
-  position: fixed;
-  left: 80%;
+  position: absolute;
+  margin-left: -60%;
   transition-duration: 0.3s;
   z-index: 100;
 }
@@ -320,8 +320,8 @@ export default {
   padding: 3px;
   box-shadow: 2px 2px 2px rgba(200, 200, 200, 0.3);
   font-family: "Microsoft YaHei UI", sans-serif;
-  position: fixed;
-  left: 58%;
+  position: absolute;
+  margin-left: 0;
   transition-duration: 0.3s;
   z-index: 101;
 }

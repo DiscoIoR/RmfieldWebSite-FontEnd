@@ -337,6 +337,16 @@ export default {
                 color: "rgba(0, 0, 0, 1)"
               }
             },
+            axisLabel: {
+              fontSize: 11,
+              width:50,
+              overflow: 'truncate',
+              hideOverlap: false,
+              interval: 0
+            },
+            axisTick: {
+              interval: 0
+            },
             z: 5
           }
         ],
@@ -454,6 +464,16 @@ export default {
               lineStyle: {
                 color: "rgba(0, 0, 0, 1)"
               }
+            },
+            axisLabel: {
+              fontSize: 11,
+              width:50,
+              overflow: 'truncate',
+              hideOverlap: false,
+              interval: 0
+            },
+            axisTick: {
+              interval: 0
             },
             z: 5
           }
