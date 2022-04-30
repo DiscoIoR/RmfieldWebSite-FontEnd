@@ -4,7 +4,7 @@
       <div class="register-content">
         <div class="register-card-head">
           <div class="register-result-error" v-if="register_result!==0">
-            <img src="/src/assets/error.png" alt="" class="register-result-error-image">
+            <img :src="require('/src/assets/error.png')" alt="failed" class="register-result-error-image">
             <div class="register-result-error-text">
               <span>register failed</span>
               <p class="register-result-error-text-details">可能是用户名已存在或邀请码错误导致的注册失败.</p>
@@ -18,7 +18,7 @@
                    placeholder=" username" title="username,special characters are not allowed"
                    class="register-card-input">
             <div class="register-error" v-show="username_error===true">
-              <img src="/src/assets/error.png" alt="" class="register-error-image">
+              <img :src="require('/src/assets/error.png')" alt="" class="register-error-image">
               <span class="register-error-details">{{ username_error_detail }}</span>
             </div>
           </div>
@@ -28,7 +28,7 @@
                    placeholder=" password" title="password,special characters are not allowed"
                    class="register-card-input">
             <div class="register-error" v-show="password_error===true">
-              <img src="/src/assets/error.png" alt="" class="register-error-image">
+              <img :src="require('/src/assets/error.png')" alt="" class="register-error-image">
               <span class="register-error-details">{{ password_error_detail }}</span>
             </div>
           </div>
@@ -38,7 +38,7 @@
                    placeholder=" retype password" title="retype the password you just input"
                    class="register-card-input">
             <div class="register-error" v-show="repassword_error===true">
-              <img src="/src/assets/error.png" alt="" class="register-error-image">
+              <img :src="require('/src/assets/error.png')" alt="" class="register-error-image">
               <span class="register-error-details">{{ repassword_error_detail }}</span>
             </div>
           </div>
@@ -48,7 +48,7 @@
                    placeholder=" realname" title="a note of your identity,special characters are not allowed"
                    class="register-card-input">
             <div class="register-error" v-show="realname_error===true">
-              <img src="/src/assets/error.png" alt="" class="register-error-image">
+              <img :src="require('/src/assets/error.png')" alt="" class="register-error-image">
               <span class="register-error-details">{{ realname_error_detail }}</span>
             </div>
           </div>
@@ -58,7 +58,7 @@
                    placeholder=" invitation code" title="contact me to get an invitation code"
                    class="register-card-input">
             <div class="register-error" v-show="invitationcode_error===true">
-              <img src="/src/assets/error.png" alt="" class="register-error-image">
+              <img :src="require('/src/assets/error.png')" alt="failed" class="register-error-image">
               <span class="register-error-details">{{ invitationcode_error_detail }}</span>
             </div>
           </div>
@@ -79,7 +79,7 @@
       <div class="login-content">
         <div class="login-card-head">
           <div class="login-error" v-if="login_result!==0">
-            <img src="/src/assets/error.png" alt="" class="login-error-image">
+            <img :src="require('/src/assets/error.png')" class="login-error-image" alt="failed">
             <div class="login-error-text">
               <span>login failed</span>
               <p class="login-error-text-details">可能是用户名或密码错误导致的登录失败.</p>

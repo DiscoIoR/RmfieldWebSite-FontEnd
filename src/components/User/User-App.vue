@@ -1,5 +1,6 @@
 <template>
   <Base />
+  <NoticeBoard/>
   <NavigationBar
       :element_1="element_1"
       :element_1_url="element_1_url"
@@ -15,12 +16,14 @@
 <script>
 import Base from "@/components/Base";
 import NavigationBar from "@/components/NavigationBar";
+import NoticeBoard from "@/components/User/NoticeBoard";
 
 export default {
   name: "User-App",
   components:{
     Base,
-    NavigationBar
+    NavigationBar,
+    NoticeBoard
   },
   setup:function (){
     return{
